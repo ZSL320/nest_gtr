@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /private/
+Allow: /
+
+# 允许所有搜索引擎抓取整个网站
+User-agent: *
+Disallow:
+
+# 阻止某些敏感目录或文件
+Disallow: /admin/
+Disallow: /login/
+Disallow: /temp/
+
+# 如果需要，可以添加其他特定的目录或文件
