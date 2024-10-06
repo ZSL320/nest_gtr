@@ -88,13 +88,14 @@ app.get('/feedback', (req, res) => {
   });
 });
 
-app.get('/ip', (req, res) => {
-  // 从请求头中获取用户的IP地址
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  const userIp = ip.replace(/^::ffff:/, '');
-
-  // 这里可以选择不使用ipify API，直接返回用户的IP
-  res.json({ userIp: userIp });
+app.get('/ip', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.ipify.org?format=json');
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching IP:', error);
+    res.status(500).json({ error: 'Failed to fetch IP address' });
+  }
 });
 
 // 读取 SSL 证书

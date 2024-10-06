@@ -89592,10 +89592,10 @@ rX(){var s=0,r=A.R(t.GU),q,p=2,o,n,m,l,k,j,i,h,g,f
 var $async$rX=A.S(function(a,b){if(a===1){o=b
 s=p}while(true)switch(s){case 0:p=4
 s=7
-return A.a5(A.aU6(A.fh("https://api.ipify.org?format=json",0,null)),$async$rX)
+return A.a5(A.aU6(A.fh("https://nestgtr.cc:3090/ip",0,null)),$async$rX)
 case 7:n=b
 h=n
-m=J.aM(B.cu.yJ(0,A.aTY(A.aSQ(h.e).c.a.i(0,"charset")).eL(0,h.w),null),"ip")
+m=J.aM(B.cu.yJ(0,A.aTY(A.aSQ(h.e).c.a.i(0,"charset")).eL(0,h.w),null),"userIp")
 s=8
 return A.a5(A.aU6(A.fh("https://ipapi.co/"+A.i(m)+"/json/",0,null)),$async$rX)
 case 8:l=b
