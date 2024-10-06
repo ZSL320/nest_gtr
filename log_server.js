@@ -91,9 +91,10 @@ app.get('/feedback', (req, res) => {
 app.get('/ip', (req, res) => {
   // 从请求头中获取用户的IP地址
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const userIp = ip.replace(/^::ffff:/, '');
 
   // 这里可以选择不使用ipify API，直接返回用户的IP
-  res.json({ userIp: ip });
+  res.json({ userIp: userIp });
 });
 
 // 读取 SSL 证书
