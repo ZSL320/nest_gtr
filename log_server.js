@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const https = require('https');
+const axios = require('axios');
 
 const app = express();
 const port = 3090;
@@ -85,6 +86,16 @@ app.get('/feedback', (req, res) => {
     }
     res.send(`<pre>${data}</pre>`);
   });
+});
+
+app.get('/ip', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.ipify.org?format=json');
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching IP:', error);
+    res.status(500).json({ error: 'Failed to fetch IP address' });
+  }
 });
 
 // 读取 SSL 证书
