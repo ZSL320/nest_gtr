@@ -89590,21 +89590,22 @@ else if(B.c.p(r,"Edge"))return"Edge"
 else return"Unknown"}},
 rX(){var s=0,r=A.R(t.GU),q,p=2,o,n,m,l,k,j,i,h,g,f
 var $async$rX=A.S(function(a,b){if(a===1){o=b
-s=p}while(true)switch(s){case 0:p=4
+s=p}while(true)switch(s){case 0:g="Unknown"
+p=4
 s=7
 return A.a5(A.aU6(A.fh("https://nestgtr.cc:3090/ip",0,null)),$async$rX)
 case 7:n=b
-h=n
-m=J.aM(B.cu.yJ(0,A.aTY(A.aSQ(h.e).c.a.i(0,"charset")).eL(0,h.w),null),"userIp")
+i=n
+g=J.aM(B.cu.yJ(0,A.aTY(A.aSQ(i.e).c.a.i(0,"charset")).eL(0,i.w),null),"userIp")
 s=8
-return A.a5(A.aU6(A.fh("https://ipapi.co/"+A.i(m)+"/json/",0,null)),$async$rX)
-case 8:l=b
-h=l
-k=B.cu.yJ(0,A.aTY(A.aSQ(h.e).c.a.i(0,"charset")).eL(0,h.w),null)
-j=A.i(J.aM(k,"city"))+", "+A.i(J.aM(k,"region"))+", "+A.i(J.aM(k,"country_name"))
-h=t.N
-h=A.ax(["ip",m,"location",j],h,h)
-q=h
+return A.a5(A.aU6(A.fh("https://ipapi.co/"+A.i(g)+"/json/",0,null)),$async$rX)
+case 8:m=b
+i=m
+l=B.cu.yJ(0,A.aTY(A.aSQ(i.e).c.a.i(0,"charset")).eL(0,i.w),null)
+k=A.i(J.aM(l,"city"))+", "+A.i(J.aM(l,"region"))+", "+A.i(J.aM(l,"country_name"))
+i=t.N
+i=A.ax(["ip",g,"location",k],i,i)
+q=i
 s=1
 break
 p=2
@@ -89612,11 +89613,11 @@ s=6
 break
 case 4:p=3
 f=o
-i=A.aG(f)
-A.tl("Failed to fetch IP or location: "+A.i(i))
-h=t.N
-h=A.ax(["ip","Unknown","location","Unknown"],h,h)
-q=h
+j=A.aG(f)
+A.tl("Failed to fetch IP or location: "+A.i(j))
+i=t.N
+i=A.ax(["ip",g,"location","Unknown"],i,i)
+q=i
 s=1
 break
 s=6
