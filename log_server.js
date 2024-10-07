@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage , limits: { fileSize: 100 * 1024 * 1024 } }); // 限制文件大小最大为 100MB
 // 使用 CORS 中间件
 app.use(cors());
 
@@ -119,6 +119,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   const uploadPath = path.join('/home/ubuntu/uploads', req.file.filename);
   fs.writeFile(uploadPath, req.file.buffer, (err) => {
     if (err) {
+      console.error('Error saving file:', err); // 打印具体的错误信息
       return res.status(500).send('Error saving file.');
     }
 
