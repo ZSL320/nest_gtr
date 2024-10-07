@@ -111,16 +111,24 @@ app.get('/ip', async (req, res) => {
 
 // 文件上传接口
 app.post('/upload', upload.single('file'), (req, res) => {
-  // 这里 'file' 是表单中上传文件的字段名
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
-  // 构造文件的 URL
-  const fileUrl = `https://nestgtr.cc:${port}/uploads/${req.file.filename}`;
 
-  res.status(200).json({
-    message: `File uploaded successfully: ${req.file.originalname}`,
-    fileUrl: fileUrl
+  // 保存文件
+  const uploadPath = path.join(__dirname, 'uploads', req.file.filename);
+  fs.writeFile(uploadPath, req.file.buffer, (err) => {
+    if (err) {
+      return res.status(500).send('Error saving file.');
+    }
+
+    // 构造文件的 URL
+    const fileUrl = `https://nestgtr.cc:${port}/uploads/${req.file.filename}`;
+
+    res.status(200).json({
+      message: `File uploaded successfully: ${req.file.originalname}`,
+      fileUrl: fileUrl
+    });
   });
 });
 
