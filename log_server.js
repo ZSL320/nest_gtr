@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     cb(null, '/home/ubuntu/uploads'); // 上传的文件存储在 uploads 目录
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // 使用原始文件名
+    cb(null, decodeURIComponent(file.originalname)); // 解码文件名并保存
   }
 });
 
@@ -116,8 +116,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   }
 
   // 构造文件的 URL
-  const fileUrl = `https://nestgtr.cc:${port}/uploads/${req.file.filename}`;
-
+  const fileUrl = `https://nestgtr.cc:${port}/uploads/${decodeURIComponent(req.file.filename)}`;
   res.status(200).json({
     message: `File uploaded successfully: ${req.file.originalname}`,
     fileUrl: fileUrl
