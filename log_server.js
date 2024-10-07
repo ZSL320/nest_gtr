@@ -116,7 +116,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   }
 
   // 保存文件
-  const uploadPath = path.join(__dirname, 'uploads', req.file.filename);
+  const uploadPath = path.join('/home/ubuntu/uploads', req.file.filename);
   fs.writeFile(uploadPath, req.file.buffer, (err) => {
     if (err) {
       return res.status(500).send('Error saving file.');
@@ -135,7 +135,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 // 文件下载接口
 app.get('/uploads/:filename', (req, res) => {
   const filename = req.params.filename;
-  const filePath = path.join(__dirname, 'uploads', filename);
+  const filePath = path.join('/home/ubuntu/uploads', filename);
 
   res.download(filePath, (err) => {
     if (err) {
