@@ -5,10 +5,22 @@ const path = require('path');
 const cors = require('cors');
 const https = require('https');
 const axios = require('axios');
+const multer = require('multer'); // 引入 multer
 
 const app = express();
 const port = 3090;
 
+// 设置 multer 存储配置
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // 上传的文件存储在 uploads 目录
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // 使用原始文件名
+  }
+});
+
+const upload = multer({ storage: storage });
 // 使用 CORS 中间件
 app.use(cors());
 
@@ -95,6 +107,34 @@ app.get('/ip', async (req, res) => {
   const userIp = ip.replace(/^::ffff:/, '');
   // 这里可以选择不使用ipify API，直接返回用户的IP
   res.json({ userIp: userIp });
+});
+
+// 文件上传接口
+app.post('/upload', upload.single('file'), (req, res) => {
+  // 这里 'file' 是表单中上传文件的字段名
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  // 构造文件的 URL
+  const fileUrl = `https://nestgtr.cc:${port}/uploads/${req.file.filename}`;
+
+  res.status(200).json({
+    message: `File uploaded successfully: ${req.file.originalname}`,
+    fileUrl: fileUrl
+  });
+});
+
+// 文件下载接口
+app.get('/uploads/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'uploads', filename);
+
+  res.download(filePath, (err) => {
+    if (err) {
+      console.error('Failed to download file:', err);
+      return res.status(500).send('Failed to download file');
+    }
+  });
 });
 
 // 读取 SSL 证书
