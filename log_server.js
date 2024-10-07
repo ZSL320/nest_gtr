@@ -115,12 +115,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
     return res.status(400).send('No file uploaded.');
   }
 
-// 文件上传接口
-app.post('/upload', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded.');
-  }
-
   // 构造文件的 URL
   const fileUrl = `https://nestgtr.cc:${port}/uploads/${req.file.filename}`;
 
@@ -129,6 +123,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     fileUrl: fileUrl
   });
 });
+
 
 // 文件下载接口
 app.get('/uploads/:filename', (req, res) => {
