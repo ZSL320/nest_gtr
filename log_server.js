@@ -13,7 +13,7 @@ const port = 3090;
 // 设置 multer 存储配置
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // 上传的文件存储在 uploads 目录
+    cb(null, '/home/ubuntu/uploads'); // 上传的文件存储在 uploads 目录
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname); // 使用原始文件名
