@@ -137,6 +137,28 @@ app.get('/uploads/:filename', (req, res) => {
   });
 });
 
+// 获取 uploads 目录下的所有文件列表
+app.get('/uploads', (req, res) => {
+  const uploadsDir = '/home/ubuntu/uploads';
+
+  fs.readdir(uploadsDir, (err, files) => {
+    if (err) {
+      console.error('Failed to read uploads directory:', err);
+      return res.status(500).send('Failed to read uploads directory');
+    }
+
+    // 生成文件列表
+    const fileList = files.map(file => {
+      return {
+        name: file,
+        url: `https://nestgtr.cc:${port}/uploads/${encodeURIComponent(file)}`
+      };
+    });
+
+    res.json(fileList);
+  });
+});
+
 // 读取 SSL 证书
 const sslOptions = {
   key: fs.readFileSync('/home/ubuntu/nestgtr.cc_nginx/nestgtr.cc.key'),
